@@ -3,9 +3,17 @@ sequenceDiagram
     participant browser
     participant server
 
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/notes
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: HTML document
+
+    server-->>browser: HTTP status code 302
+    deactivate server
+
+    Note right of browser: The HTTP POST request causes the server to respond with the HTTP status code 302 which turns into a URL redirect with which the server asks the browser to perform a new HTTP GET.
+
+    browser-->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML Document
     deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
@@ -17,8 +25,6 @@ sequenceDiagram
     activate server
     server-->>browser: the JavaScript file
     deactivate server
-
-    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
