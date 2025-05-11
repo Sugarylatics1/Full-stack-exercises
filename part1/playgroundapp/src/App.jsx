@@ -13,6 +13,21 @@ const Hello = ({name, age}) => {
   )
 }
 
+const Display = (props) => {
+  return( 
+  <>
+    {props.counter}
+  </>
+  )
+}
+
+const Button = (props) => {
+  return (
+    <button onClick={props.onClick}>
+      {props.text}
+    </button>
+  )
+}
 
 const App = () => {
   const [ counter, setCounter ] = useState(0)
@@ -21,25 +36,18 @@ const App = () => {
   console.log('rendering...', counter)
   const setToZero = () => setCounter(0)
   const increaseByOne = () => setCounter(counter + 1)
+  const decreaseByOne = () => setCounter(counter - 1)
 
   return (
     <div>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} />
       <Hello name={name} age={age} />
-      {counter}
-
-      <p>
-        <button onClick={increaseByOne}>
-          plus
-        </button>
-        <button onClick={setToZero}>
-          zero
-        </button>
-      </p>
+      <p><Display counter={counter}/></p>
       
-        
-      
+      <Button onClick={setToZero} text='Set to Zero'/>
+      <Button onClick={increaseByOne} text='Increase Value by 1'/>
+      <Button onClick={decreaseByOne} text='Decrease Value by 1'/>
     </div>
   )
 }
