@@ -1,5 +1,5 @@
 import {useState} from 'react'
-
+/*
 const Hello = ({name, age}) => {
   //const {name, age} = props
   const bornYear = () => new Date().getFullYear() - age  
@@ -49,6 +49,60 @@ const App = () => {
       <Button onClick={increaseByOne} text='Increase Value by 1'/>
       <Button onClick={decreaseByOne} text='Decrease Value by 1'/>
     </div>
+  )
+}
+
+*/
+
+/*
+import { useState } from 'react'
+
+const App = () => {
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div>
+      code here
+    </div>
+  )
+}
+
+export default App
+
+*/
+
+const App = () => {
+  // set constants for the buttons 
+  const [clicks, setClicks] = useState({
+    good: 0, 
+    neutral: 0, 
+    bad: 0
+  })
+  const [allClicks, setAll] = useState([])
+  const handleGoodClick = () =>{
+    setAll(allClicks.concat('good'))
+    setClicks({ ...clicks, good: clicks.good + 1 })
+  }
+  const handleNeutralClick = () => {
+    setClicks({ ...clicks, neutral: clicks.neutral + 1 })
+  }
+  const handleBadClick = () => {
+    setClicks({ ...clicks, bad: clicks.bad + 1 })
+  }
+  return (
+    <>
+      <h1>Give Feedback</h1>
+      <button onClick={handleGoodClick}>Good</button>
+      <button onClick={handleNeutralClick}>Neutral</button>
+      <button onClick={handleBadClick}>Bad</button>
+      <h1>Statistics</h1>
+      <p>Good: {clicks.good}</p>
+      <p>Neutral: {clicks.neutral}</p>
+      <p>Bad: {clicks.bad}</p>
+    </>
   )
 }
 
